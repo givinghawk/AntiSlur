@@ -6,7 +6,7 @@
 
     <groupId>org.givinghawk</groupId>
     <artifactId>AntiSlur</artifactId>
-    <version>1.0-RC2</version>
+    <version>1.0-RC3</version>
     <packaging>jar</packaging>
 
     <name>AntiSlur</name>

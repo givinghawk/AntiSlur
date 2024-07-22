@@ -38,11 +38,8 @@ public final class Antislur extends JavaPlugin implements Listener {
     private void createDefaultConfig() {
         File configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
-            Logger log = Bukkit.getLogger();
-            log.info("[AntiSlur] Config file does not exist, creating the default one now...");
             getDataFolder().mkdirs();
             saveResource("config.yml", false);
-            log.info("[AntiSlur] Default config file has been created.");
         }
     }
 
@@ -59,8 +56,9 @@ public final class Antislur extends JavaPlugin implements Listener {
         // Check for banned words
         for (String bannedWord : bannedWords) {
             if (message.toLowerCase().contains(bannedWord.toLowerCase())) {
-                Logger log = Bukkit.getLogger();
-                log.info("[AntiSlur] Found a banned word written by "+ playerName +", executing command now.");
+                // Cancel the event to prevent the message from being sent
+                event.setCancelled(true);
+
                 // Execute the command, replacing {player} with the player's name, on the main thread
                 String executedCommand = command.replace("{player}", playerName);
                 Bukkit.getScheduler().runTask(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), executedCommand));
@@ -83,6 +81,9 @@ public final class Antislur extends JavaPlugin implements Listener {
         for (String page : pages) {
             for (String bannedWord : bannedWords) {
                 if (page.toLowerCase().contains(bannedWord.toLowerCase())) {
+                    // Cancel the event to prevent the book from being edited
+                    event.setCancelled(true);
+
                     // Execute the command, replacing {player} with the player's name, on the main thread
                     String executedCommand = command.replace("{player}", playerName);
                     Bukkit.getScheduler().runTask(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), executedCommand));
@@ -106,6 +107,9 @@ public final class Antislur extends JavaPlugin implements Listener {
         for (String line : lines) {
             for (String bannedWord : bannedWords) {
                 if (line.toLowerCase().contains(bannedWord.toLowerCase())) {
+                    // Cancel the event to prevent the sign from being changed
+                    event.setCancelled(true);
+
                     // Execute the command, replacing {player} with the player's name, on the main thread
                     String executedCommand = command.replace("{player}", playerName);
                     Bukkit.getScheduler().runTask(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), executedCommand));

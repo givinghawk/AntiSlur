@@ -1,0 +1,4 @@
+name: antislur
+version: '1.0-RC2'
+main: org.givinghawk.antislur.Antislur
+api-version: '1.20'

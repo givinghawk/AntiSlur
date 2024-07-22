@@ -1,0 +1,6 @@
+banned-words:
+  - badword1
+  - badword2
+  - badword3
+
+command: "kick {player} Please watch your language!"
